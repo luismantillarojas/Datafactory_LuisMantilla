@@ -7,9 +7,25 @@
 			"metadata": "Nombre de instancia de Data Factory",
 			"defaultValue": "Mantillarojas"
 		},
+		"AzureDatabricks_DataFactory_accessToken": {
+			"type": "secureString",
+			"metadata": "Cadena protegida para \"accessToken\"de \"AzureDatabricks_DataFactory\""
+		},
+		"AzureDatabricks_DataFactory1_accessToken": {
+			"type": "secureString",
+			"metadata": "Cadena protegida para \"accessToken\"de \"AzureDatabricks_DataFactory1\""
+		},
 		"linkdeorigendeDatos_accountKey": {
 			"type": "secureString",
 			"metadata": "Cadena protegida para \"accountKey\"de \"linkdeorigendeDatos\""
+		},
+		"AzureDatabricks_DataFactory_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "TestCluster"
+		},
+		"AzureDatabricks_DataFactory1_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0203-010318-l5kvntd1"
 		},
 		"linkdeorigendeDatos_properties_typeProperties_url": {
 			"type": "string",
@@ -21,7 +37,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/PL_COPIAR_ARCHIVOS_CAPABRONCE')]",
+			"name": "[concat(parameters('factoryName'), '/PL_CAPA_BRONCE')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -162,6 +178,42 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/PL_CAPA_PLATA')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Notebook1",
+						"type": "DatabricksNotebook",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/luismantillarojas@hotmail.com/Transferencia_de_datos_capaplata"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDatabricks_DataFactory1",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks_DataFactory1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/CopiarcarpetaOrigen')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -280,6 +332,42 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/linkdeorigendeDatos')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricks_DataFactory')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-5541386964603291.11.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDatabricks_DataFactory_accessToken')]"
+					},
+					"existingClusterId": "[parameters('AzureDatabricks_DataFactory_properties_typeProperties_existingClusterId')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricks_DataFactory1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-5541386964603291.11.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDatabricks_DataFactory1_accessToken')]"
+					},
+					"existingClusterId": "[parameters('AzureDatabricks_DataFactory1_properties_typeProperties_existingClusterId')]"
+				}
+			},
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/linkdeorigendeDatos')]",
