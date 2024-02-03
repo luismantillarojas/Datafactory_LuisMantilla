@@ -101,7 +101,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"filename": {
-											"value": "@item()",
+											"value": "@item().name",
 											"type": "Expression"
 										}
 									}
@@ -110,7 +110,13 @@
 							"outputs": [
 								{
 									"referenceName": "destinocopiaArchivos",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@item().name\r\n",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
