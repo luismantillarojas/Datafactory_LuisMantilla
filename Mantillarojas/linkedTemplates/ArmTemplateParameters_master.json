@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "Mantillarojas"
 		},
+		"AzureDatabricks1_accessToken": {
+			"value": ""
+		},
 		"AzureDatabricks_DataFactory_accessToken": {
 			"value": ""
 		},
@@ -13,6 +16,9 @@
 		},
 		"linkdeorigendeDatos_accountKey": {
 			"value": ""
+		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"value": "0203-010318-l5kvntd1"
 		},
 		"AzureDatabricks_DataFactory_properties_typeProperties_existingClusterId": {
 			"value": "TestCluster"
