@@ -1,0 +1,9 @@
+{
+	"name": "Mantillarojas",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "a3ea1c43-fff2-4544-8832-b0edf3bed832",
+		"tenantId": "5cd2b385-c294-4159-8e3a-64e09544bbb5"
+	}
+}
