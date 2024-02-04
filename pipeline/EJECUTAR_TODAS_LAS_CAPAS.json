@@ -9,6 +9,7 @@
 				"policy": {
 					"secureInput": false
 				},
+				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
 						"referenceName": "PL_CAPA_BRONCE",
@@ -41,7 +42,7 @@
 				}
 			},
 			{
-				"name": "Execute Pipeline2_copy1",
+				"name": "Execute Pipeline3",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
